@@ -1,1 +1,18 @@
-<p>post-create works!</p>
+<!--<p>post-create works!</p>-->
+<!--<label>-->
+<!--  <textarea rows="4" [(ngModel)]="enteredValue" ></textarea>-->
+<!--</label>-->
+<!--<hr>-->
+<!--<button (click)="SavePost()" >Save Post</button>-->
+
+
+<mat-card>
+  <mat-form-field>
+    <label>
+      <textarea matInput rows="4" [(ngModel)]="enteredValue" ></textarea>
+    </label>
+  </mat-form-field>
+  <button  mat-raised-button (click)="SavePost()" >Save Post</button>
+</mat-card>
+
+<p>{{newPost}}</p>
