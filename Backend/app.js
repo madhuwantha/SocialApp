@@ -2,8 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-// models
-const Post = require('./models/post');
+
+// Routes
+const postRoutes = require('./routes/posts');
+
+
 
 const app = express();
 mongoose.connect("mongodb+srv://root:1234@assignment01-53moj.mongodb.net/meat-Social-App?retryWrites=true&w=majority")
@@ -28,58 +31,6 @@ app.use((req,res,next)=>{
 });
 
 
-
-// Routes
-app.post('/api/post',(req,res,next)=>{
-  const post = new Post({
-    title:req.body.title,
-    content:req.body.content
-  });
-  post.save()
-    .then(result=> {
-      res.status(201).json({
-        massage : "OK",
-        postId: result._id
-      });
-    });
-});
-
-app.get('/api/post',(req,res,next)=>{
-  Post.find()
-    .then(result=>{
-      res.status(200).json(
-        {
-          massage : "Sucessful",
-          posts : result
-        }
-      )
-    });
-});
-
-app.delete('/api/post/:id',(req,res,next)=> {
-  Post.deleteOne({_id:req.params.id})
-    .then(result=> {
-      // console.log(result);
-      res.status(200).json({massage:"Post Deleted"});
-    });
-});
-
-app.put( '/api/post/:id' ,(req,res,next) => {
-  const post = new Post({
-    _id:req.body.id,
-    title:req.body.title,
-    content:req.body.content
-  });
-  Post.updateOne({_id:req.params.id},post)
-    .then(result=>{
-      console.log(result);
-      res.status(200).json({message: "Updated"})
-    });
-});
-
-
-
-
-
+app.use('/api/post',postRoutes);
 
 module.exports = app;

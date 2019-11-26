@@ -10,3 +10,8 @@ mat-expansion-panel{
 .no-post{
   text-align: center;
 }
+
+
+mat-spinner{
+  margin: auto;
+}

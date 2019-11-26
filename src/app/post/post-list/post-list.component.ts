@@ -18,13 +18,16 @@ export class PostListComponent implements OnInit , OnDestroy {
   // using dependancy injection
   post: Post[] = [];
   private postSub: Subscription;
+  isLoading = false;
 
 
   ngOnInit() {
+    this.isLoading = true;
     this.postService.getPost();
     this.postService.getPostUpdateListener()
       .subscribe((post: Post[]) => {
         this.post = post;
+        this.isLoading = false;
       });
   }
 

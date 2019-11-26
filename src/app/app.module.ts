@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule,
   MatCardModule, MatExpansionModule,
-  MatInputModule,
+  MatInputModule, MatProgressSpinnerModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -42,7 +42,8 @@ import { PostListComponent } from './post/post-list/post-list.component';
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
