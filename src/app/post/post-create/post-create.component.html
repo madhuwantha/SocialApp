@@ -1,50 +1,30 @@
-<!--<mat-card>-->
-<!--  <mat-form-field>-->
-<!--    <input matInput type="text" name="" id="" placeholder="post Tittle" [(ngModel)]="enteredTittle" >-->
-<!--  </mat-form-field>-->
-<!--  <mat-form-field>-->
-<!--    <label>-->
-<!--      <textarea placeholder="Post Content" matInput rows="4" [(ngModel)]="enteredContent" ></textarea>-->
-<!--    </label>-->
-<!--  </mat-form-field>-->
-<!--  <button  mat-raised-button (click)="SavePost()" >Save Post</button>-->
-<!--</mat-card>-->
-
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (ngSubmit)="SavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+  <form [formGroup]="form" (submit)="SavePost()" *ngIf="!isLoading">
     <mat-form-field>
       <input
-        [ngModel]="post?.title"
         matInput
         type="text"
-        name="title"
-        required
-        minlength="3"
         placeholder="post Tittle"
-        #title="ngModel"
+        formControlName="title"
       >
-      <mat-error *ngIf="title.invalid">Please enter the title of post</mat-error>
+      <mat-error *ngIf="form.get('title').invalid">Please enter the title of post</mat-error>
     </mat-form-field>
-    <div>
-      <button type="button"
-              mat-stroked-button (click)="postImage.click()"
-      >Pick Image</button>
-      <input type="file" #postImage>
-    </div>
+        <div>
+          <button type="button"
+                  mat-stroked-button (click)="postImage.click()"
+          >Pick Image</button>
+          <input type="file" (change)="onFilePicked($event)" #postImage>
+        </div>
     <mat-form-field>
         <textarea
-          [ngModel]="post?.content"
-          required
-          minlength="3"
           placeholder="Post Content"
           matInput
-          name="content"
           rows="4"
-          #content_="ngModel"
+          formControlName="content"
         ></textarea>
-        <mat-error *ngIf="content_.invalid">Please enter the content of post</mat-error>
+      <mat-error *ngIf="form.get('content').invalid">Please enter the content of post</mat-error>
     </mat-form-field>
-    <button type="submit"  mat-raised-button>Save Post</button>
+    <button type="submit" mat-raised-button>Save Post</button>
   </form>
 </mat-card>

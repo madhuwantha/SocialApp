@@ -21,7 +21,7 @@ import { HederComponent } from './herder/heder.component';
 
 
 // form angular
-import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { PostListComponent } from './post/post-list/post-list.component';
 
 
@@ -35,7 +35,7 @@ import { PostListComponent } from './post/post-list/post-list.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
