@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostServiceService} from '../../services/post-service.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Post} from '../../models/post/post.model';
+import {mimeType} from './mime-tyoe.validator';
 
 @Component({
   selector: 'app-post-create',
@@ -17,6 +18,8 @@ export class PostCreateComponent implements OnInit {
   post: Post;
   isLoading = false;
   form: FormGroup;
+  imagePreview = String;
+  isURLok = false;
 
   SavePost() {
     if (!this.form.valid) {
@@ -41,7 +44,8 @@ export class PostCreateComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(5)]
       }),
       image: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
       })
     });
     this.router.paramMap.subscribe((paraMap: ParamMap) => {
@@ -66,8 +70,15 @@ export class PostCreateComponent implements OnInit {
   }
 
   onFilePicked(event: Event) {
+    this.isURLok = false;
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({image: file});
     this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+    this.isURLok = true;
   }
 }
