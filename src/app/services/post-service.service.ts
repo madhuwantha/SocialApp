@@ -27,7 +27,8 @@ export class PostServiceService {
           return {
             title: post.title,
             content: post.content,
-            id: post._id
+            id: post._id,
+            imagePath: post.imagePath
           };
         });
       }))
@@ -59,13 +60,14 @@ export class PostServiceService {
     postData.append('title', tittle);
     postData.append('content', content_);
     postData.append('image', image, tittle);
-    this.http.post<{massage: string, postId: string}>
+    this.http.post<{massage: string, post: Post}>
     ('http://localhost:3000/api/post', postData)
       .subscribe((res) => {
         const post: Post = {
-          id: res.postId,
+          id: res.post.id,
           content: content_,
-          title: tittle
+          title: tittle,
+          imagePath: res.post.imagePath
         };
         this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
@@ -81,7 +83,7 @@ export class PostServiceService {
   }
   // tslint:disable-next-line:variable-name
   updatePost(id: string, tittle: string , content_: string) {
-    const post: Post = {id , title: tittle, content: content_ };
+    const post: Post = {id , title: tittle, content: content_, imagePath: null};
     this.http
       .put('http://localhost:3000/api/post/' + id , post)
       .subscribe(responce => {
