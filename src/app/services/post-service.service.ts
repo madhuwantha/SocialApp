@@ -42,12 +42,31 @@ export class PostServiceService {
   }
 
   // tslint:disable-next-line:variable-name
-  addPost(tittle: string,  content_: string) {
-    const post: Post = {id: null , title: tittle, content: content_ };
-    this.http.post<{massage: string, postId: string}>('http://localhost:3000/api/post', post)
+  // addPost(tittle: string,  content_: string) {
+  //   const post: Post = {id: null , title: tittle, content: content_ };
+  //   this.http.post<{massage: string, postId: string}>('http://localhost:3000/api/post', post)
+  //     .subscribe((res) => {
+  //       post.id = res.postId;
+  //       this.posts.push(post);
+  //       this.postUpdated.next([...this.posts]);
+  //       this.router.navigate(['/']);
+  //     });
+  // }
+
+  // tslint:disable-next-line:variable-name
+  addPost(tittle: string,  content_: string, image: File) {
+    const postData = new FormData();
+    postData.append('title', tittle);
+    postData.append('content', content_);
+    postData.append('image', image, tittle);
+    this.http.post<{massage: string, postId: string}>
+    ('http://localhost:3000/api/post', postData)
       .subscribe((res) => {
-        post.id = res.postId;
-        this.posts.push(post);
+        const post: Post = {
+          id: res.postId,
+          content: content_,
+          title: tittle
+        };
         this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       });
