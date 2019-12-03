@@ -14,7 +14,7 @@ export class PostServiceService {
   constructor(private http: HttpClient , private  router: Router ) { }
 
   getOnePost(id: string) {
-    return this.http.get<{_id: string, title: string, content: string}>
+    return this.http.get<{_id: string, title: string, content: string, imagePath: string}>
     ('http://localhost:3000/api/post/' + id);
   }
 
@@ -82,13 +82,33 @@ export class PostServiceService {
       });
   }
   // tslint:disable-next-line:variable-name
-  updatePost(id: string, tittle: string , content_: string) {
-    const post: Post = {id , title: tittle, content: content_, imagePath: null};
+  updatePost(id: string, tittle: string , content_: string, image: File | string) {
+    let postData: Post | FormData;
+    if (typeof image === 'object') {
+      postData = new FormData();
+      postData.append('id' , id);
+      postData.append('title', tittle);
+      postData.append('content', content_);
+      postData.append('image', image, tittle);
+    } else {
+      postData = {
+        id,
+        title: tittle,
+        content: content_,
+        imagePath: image
+      };
+    }
     this.http
-      .put('http://localhost:3000/api/post/' + id , post)
+      .put('http://localhost:3000/api/post/' + id , postData)
       .subscribe(responce => {
         const updatedpost  = [...this.posts];
-        const oldPostindex = updatedpost.findIndex(p => p.id === post.id);
+        const oldPostindex = updatedpost.findIndex(p => p.id === id);
+        const post: Post = {
+          id,
+          title: tittle,
+          content: content_,
+          imagePath: 'responce.imagePath'
+        };
         updatedpost[oldPostindex] = post;
         this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
