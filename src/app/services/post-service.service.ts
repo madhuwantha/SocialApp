@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class PostServiceService {
   private posts: Post[] = [];
-  private postUpdated = new Subject<Post[]>();
+  private postUpdated = new Subject<{post: Post[], postCounter: number }>();
   constructor(private http: HttpClient , private  router: Router ) { }
 
   getOnePost(id: string) {
@@ -21,21 +21,27 @@ export class PostServiceService {
   getPosts(postPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`
     this.http
-      .get<{massage: string, posts: any}>
+      .get<{massage: string, posts: any, maxPost: number}>
       ('http://localhost:3000/api/post' + queryParams)
       .pipe(map((postData) => {
-        return postData.posts.map(post => {
-          return {
-            title: post.title,
-            content: post.content,
-            id: post._id,
-            imagePath: post.imagePath
-          };
-        });
+        return {
+          post: postData.posts.map(post => {
+            return {
+              title: post.title,
+              content: post.content,
+              id: post._id,
+              imagePath: post.imagePath
+            };
+          }),
+          maxPost: postData.maxPost
+        };
       }))
       .subscribe((transformedPosts) => {
-        this.posts = transformedPosts;
-        this.postUpdated.next([...this.posts]);
+        this.posts = transformedPosts.post;
+        this.postUpdated.next({
+          post: [...this.posts],
+          postCounter: transformedPosts.maxPost
+        });
       });
   }
 
@@ -43,17 +49,6 @@ export class PostServiceService {
     return this.postUpdated.asObservable();
   }
 
-  // tslint:disable-next-line:variable-name
-  // addPost(tittle: string,  content_: string) {
-  //   const post: Post = {id: null , title: tittle, content: content_ };
-  //   this.http.post<{massage: string, postId: string}>('http://localhost:3000/api/post', post)
-  //     .subscribe((res) => {
-  //       post.id = res.postId;
-  //       this.posts.push(post);
-  //       this.postUpdated.next([...this.posts]);
-  //       this.router.navigate(['/']);
-  //     });
-  // }
 
   // tslint:disable-next-line:variable-name
   addPost(tittle: string,  content_: string, image: File) {
@@ -64,23 +59,12 @@ export class PostServiceService {
     this.http.post<{massage: string, post: Post}>
     ('http://localhost:3000/api/post', postData)
       .subscribe((res) => {
-        const post: Post = {
-          id: res.post.id,
-          content: content_,
-          title: tittle,
-          imagePath: res.post.imagePath
-        };
-        this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       });
   }
 
   deletePost(id: string) {
-    this.http.delete('http://localhost:3000/api/post/' + id)
-      .subscribe(() => {
-        this.posts = this.posts.filter(post => post.id !== id);
-        this.postUpdated.next([...this.posts]);
-      });
+    return this.http.delete('http://localhost:3000/api/post/' + id);
   }
   // tslint:disable-next-line:variable-name
   updatePost(id: string, tittle: string , content_: string, image: File | string) {
@@ -102,16 +86,6 @@ export class PostServiceService {
     this.http
       .put('http://localhost:3000/api/post/' + id , postData)
       .subscribe(responce => {
-        const updatedpost  = [...this.posts];
-        const oldPostindex = updatedpost.findIndex(p => p.id === id);
-        const post: Post = {
-          id,
-          title: tittle,
-          content: content_,
-          imagePath: 'responce.imagePath'
-        };
-        updatedpost[oldPostindex] = post;
-        this.postUpdated.next([...this.posts]);
         this.router.navigate(['/']);
       });
   }

@@ -51,6 +51,7 @@ router.get('',(req,res,next)=>{
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const postQuery = Post.find();
+  let fechedPost;
   if (pageSize && currentPage){
     postQuery
       .skip(pageSize * (currentPage-1))
@@ -58,10 +59,15 @@ router.get('',(req,res,next)=>{
   }
   postQuery
     .then(result=>{
+      fechedPost = result;
+      return Post.count();
+    })
+    .then(count => {
       res.status(200).json(
         {
           massage : "Sucessful",
-          posts : result
+          posts : fechedPost,
+          maxPost: count
         }
       )
     });

@@ -20,7 +20,7 @@ export class PostListComponent implements OnInit , OnDestroy {
   post: Post[] = [];
   private postSub: Subscription;
   isLoading = false;
-  totalPosts = 10;
+  totalPosts = 0;
   currentPage = 1;
   postsPerPage = 2;
   pageSizeOptions = [1, 2, 5, 10];
@@ -30,8 +30,9 @@ export class PostListComponent implements OnInit , OnDestroy {
     this.isLoading = true;
     this.postService.getPosts(this.postsPerPage, this.currentPage);
     this.postService.getPostUpdateListener()
-      .subscribe((post: Post[]) => {
-        this.post = post;
+      .subscribe((postData: {post: Post[], postCounter: number}) => {
+        this.post = postData.post;
+        this.totalPosts = postData.postCounter;
         this.isLoading = false;
       });
   }
@@ -43,10 +44,15 @@ export class PostListComponent implements OnInit , OnDestroy {
   }
 
   onDelete(id: string) {
-    this.postService.deletePost(id);
+    this.isLoading = true;
+    this.postService.deletePost(id)
+      .subscribe(() => {
+        this.postService.getPosts(this.postsPerPage, this.currentPage);
+      });
   }
 
   onChangePage(pageData: PageEvent) {
+    this.isLoading = true;
     this.postsPerPage = pageData.pageSize;
     this.currentPage = pageData.pageIndex + 1;
     this.postService.getPosts(this.postsPerPage, this.currentPage);
