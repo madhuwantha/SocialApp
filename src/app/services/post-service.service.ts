@@ -18,10 +18,11 @@ export class PostServiceService {
     ('http://localhost:3000/api/post/' + id);
   }
 
-  getPost() {
+  getPosts(postPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`
     this.http
       .get<{massage: string, posts: any}>
-      ('http://localhost:3000/api/post')
+      ('http://localhost:3000/api/post' + queryParams)
       .pipe(map((postData) => {
         return postData.posts.map(post => {
           return {
