@@ -22,4 +22,16 @@ export class AuthService {
         console.log(res);
       });
   }
+
+  // tslint:disable-next-line:variable-name
+  login(emial: string, password_: string) {
+    const authData: AuthData = {
+      email: emial,
+      password: password_
+    };
+    this.http.post<{massage: string}>('http://localhost:3000/api/user/login', authData )
+      .subscribe( res => {
+        console.log(res);
+      });
+  }
 }
