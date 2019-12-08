@@ -7,6 +7,7 @@ import {AuthData} from '../../models/auth/auth.model';
   providedIn: 'root'
 })
 export class AuthService {
+  private authtoken: string;
 
   constructor( private http: HttpClient , private  router: Router  ) { }
 
@@ -29,9 +30,14 @@ export class AuthService {
       email: emial,
       password: password_
     };
-    this.http.post<{massage: string}>('http://localhost:3000/api/user/login', authData )
+    this.http.post<{token: string}>('http://localhost:3000/api/user/login', authData )
       .subscribe( res => {
-        console.log(res);
+        // console.log(res);
+        this.authtoken = res.token;
       });
+  }
+
+  getToken() {
+    return this.authtoken;
   }
 }
