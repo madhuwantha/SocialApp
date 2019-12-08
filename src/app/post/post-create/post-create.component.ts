@@ -1,6 +1,6 @@
 import {Component, OnInit, } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {PostServiceService} from '../../services/post-service.service';
+import {PostServiceService} from '../../services/post/post-service.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Post} from '../../models/post/post.model';
 import {mimeType} from './mime-tyoe.validator';

@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PageEvent} from '@angular/material';
 import {Post} from '../../models/post/post.model';
-import {PostServiceService} from '../../services/post-service.service';
+import {PostServiceService} from '../../services/post/post-service.service';
 import { Subscription} from 'rxjs';
 
 @Component({
