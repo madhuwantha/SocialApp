@@ -22,8 +22,10 @@ import { HederComponent } from './herder/heder.component';
 
 
 // form angular
-import { ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PostListComponent } from './post/post-list/post-list.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
@@ -31,11 +33,14 @@ import { PostListComponent } from './post/post-list/post-list.component';
     AppComponent,
     PostCreateComponent,
     HederComponent,
-    PostListComponent
+    PostListComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,

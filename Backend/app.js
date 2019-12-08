@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 // Routes
 const postRoutes = require('./routes/posts');
+const userRoutes = require('./routes/user');
 
 
 
@@ -35,5 +36,6 @@ app.use((req,res,next)=>{
 
 
 app.use('/api/post',postRoutes);
+app.use('/api/user',userRoutes);
 
 module.exports = app;
