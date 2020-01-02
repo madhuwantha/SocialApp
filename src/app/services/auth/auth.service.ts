@@ -40,6 +40,7 @@ export class AuthService {
           this.authtoken = res.token;
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
+          this.router.navigate(['/']);
         }
       });
   }
@@ -48,6 +49,7 @@ export class AuthService {
     this.authtoken = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
+    this.router.navigate(['/']);
   }
 
   getToken() {
