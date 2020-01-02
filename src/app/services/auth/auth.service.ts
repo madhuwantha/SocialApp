@@ -12,6 +12,8 @@ export class AuthService {
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
 
+  private tokenTimer: any;
+
   constructor( private http: HttpClient , private  router: Router  ) { }
 
   // tslint:disable-next-line:variable-name
@@ -33,10 +35,14 @@ export class AuthService {
       email: emial,
       password: password_
     };
-    this.http.post<{token: string}>('http://localhost:3000/api/user/login', authData )
+    this.http.post<{token: string, expiresIn: number}>('http://localhost:3000/api/user/login', authData )
       .subscribe( res => {
         // console.log(res);
         if (res.token != null) {
+          const expiresInDuration = res.expiresIn;
+          this.tokenTimer = setTimeout(() => {
+            this.logUot();
+          }, expiresInDuration * 1000);
           this.authtoken = res.token;
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
@@ -49,6 +55,7 @@ export class AuthService {
     this.authtoken = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
+    clearTimeout(this.tokenTimer);
     this.router.navigate(['/']);
   }
 
