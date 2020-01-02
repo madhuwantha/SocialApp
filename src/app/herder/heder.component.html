@@ -28,7 +28,7 @@
         </a>
       </li>
       <li *ngIf="userIsAuthenticated">
-        <button mat-button>Logout</button>
+        <button (click)="logOut()" mat-button>Logout</button>
       </li>
     </ul>
 

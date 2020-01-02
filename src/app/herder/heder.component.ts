@@ -24,4 +24,7 @@ export class HederComponent implements OnInit , OnDestroy {
     this.authListenerSubs.unsubscribe();
   }
 
+  logOut() {
+    this.authService.logUot();
+  }
 }
