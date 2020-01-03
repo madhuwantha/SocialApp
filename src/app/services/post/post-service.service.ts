@@ -14,7 +14,7 @@ export class PostServiceService {
   constructor(private http: HttpClient , private  router: Router ) { }
 
   getOnePost(id: string) {
-    return this.http.get<{_id: string, title: string, content: string, imagePath: string}>
+    return this.http.get<{_id: string, title: string, content: string, imagePath: string, creator: string}>
     ('http://localhost:3000/api/post/' + id);
   }
 
@@ -30,7 +30,8 @@ export class PostServiceService {
               title: post.title,
               content: post.content,
               id: post._id,
-              imagePath: post.imagePath
+              imagePath: post.imagePath,
+              creator: post.creator
             };
           }),
           maxPost: postData.maxPost
@@ -80,7 +81,8 @@ export class PostServiceService {
         id,
         title: tittle,
         content: content_,
-        imagePath: image
+        imagePath: image,
+        creator: null
       };
     }
     this.http

@@ -28,13 +28,15 @@ const storage = multer.diskStorage({
 });
 
 
-router.post('',checkAuth,multer({storage: storage}).single("image") ,(req,res,next)=>{
-  console.log(req.body);
+router.post('',checkAuth,
+  multer({storage: storage}).single("image") ,
+  (req,res,next)=>{
   const url = req.protocol + "://" + req.get("host");
   const post = new Post({
     title:req.body.title,
     content:req.body.content,
-    imagePath: url + "/imgs/" + req.file.filename
+    imagePath: url + "/imgs/" + req.file.filename,
+    creator: req.userData.userId
   });
   post.save()
     .then(result=> {
@@ -85,10 +87,14 @@ router.get( '/:id' ,(req,res,next) => {
 });
 
 router.delete('/:id',checkAuth,(req,res,next)=> {
-  Post.deleteOne({_id:req.params.id})
+  Post.deleteOne({_id:req.params.id, creator: req.userData.userId})
     .then(result=> {
-      // console.log(result);
-      res.status(200).json({massage:"Post Deleted"});
+      if (result.n > 0){
+        res.status(200).json({massage:"Post Deleted"});
+      }else {
+        res.status(401).json({message: "not authorized"})
+      }
+
     });
 });
 
@@ -106,12 +112,16 @@ router.put(
     _id:req.body.id,
     title:req.body.title,
     content:req.body.content,
-    imagePath: imagePath
+    imagePath: imagePath,
+    creator: req.userData.userId
   });
-  Post.updateOne({_id:req.params.id},post)
+  Post.updateOne({_id:req.params.id, creator: req.userData.userId},post)
     .then(result=>{
-      // console.log(result);
-      res.status(200).json({message: "Updated"})
+      if (result.nModified > 0){
+        res.status(200).json({message: "Updated"})
+      }else {
+        res.status(401).json({message: "not authorized"})
+      }
     });
 });
 
