@@ -1,18 +1,22 @@
-import {Component, OnInit, } from '@angular/core';
+import {Component, OnDestroy, OnInit,} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostServiceService} from '../../services/post/post-service.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Post} from '../../models/post/post.model';
 import {mimeType} from './mime-tyoe.validator';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.css']
 })
-export class PostCreateComponent implements OnInit {
+export class PostCreateComponent implements OnInit, OnDestroy {
 
-  constructor(public postService: PostServiceService, public router: ActivatedRoute ) { }
+  constructor(public postService: PostServiceService,
+              public router: ActivatedRoute,
+              private authService
+        ) { }
   mode = 'create';
   postId = '';
   post: Post;
@@ -20,6 +24,7 @@ export class PostCreateComponent implements OnInit {
   form: FormGroup;
   imagePreview = String;
   isURLok = false;
+  authStateSub: Subscription;
 
   SavePost() {
     if (!this.form.valid) {
@@ -45,6 +50,10 @@ export class PostCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authStateSub = this.authService.getAuthStatusListener()
+      .subscribe(authStatus => {
+        this.isLoading = false;
+      });
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
@@ -96,5 +105,9 @@ export class PostCreateComponent implements OnInit {
     };
     reader.readAsDataURL(file);
     this.isURLok = true;
+  }
+
+  ngOnDestroy(): void {
+    this.authStateSub.unsubscribe();
   }
 }
