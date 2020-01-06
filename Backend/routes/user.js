@@ -20,7 +20,7 @@ router.post("/signup" , (req,res,next) => {
         })
         .catch(err => {
           res.status(500).json({
-            error: err
+              message: "Invalid authentication credentials!"
           })
         });
     })
@@ -35,7 +35,7 @@ router.post("/login", (req,res,next)=>{
     .then( user =>{
       if (!user){
        return res.status(401).json({
-         massage: "Email not Found"
+         message: "Email not Found"
        });
       }
       user_ = user;
@@ -44,7 +44,7 @@ router.post("/login", (req,res,next)=>{
     .then(result=>{
       if (!result){
         return res.status(401).json({
-          massage: "Password invalid"
+          message: "Password invalid"
         });
       }
       const  token  = jwt.sign(
@@ -60,7 +60,7 @@ router.post("/login", (req,res,next)=>{
     })
     .catch(err =>{
       return res.status(401).json({
-        massage: "Auth Filed"
+        message: "Invalid authentication credentials!"
       });
     });
 });

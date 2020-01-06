@@ -41,12 +41,17 @@ router.post('',checkAuth,
   post.save()
     .then(result=> {
       res.status(201).json({
-        massage : "OK",
+        message : "Post added successfully!",
         post: {
           ...result,
           id: result._id
         }
       });
+    })
+    .catch(error=>{
+      res.status(500).json({
+        message: "Creating pa post failed!"
+      })
     });
 });
 
@@ -73,6 +78,11 @@ router.get('',(req,res,next)=>{
           maxPost: count
         }
       )
+    })
+    .catch(error =>{
+      res.status(500).json({
+        message: "Fetching post failed!"
+      })
     });
 });
 router.get( '/:id' ,(req,res,next) => {
@@ -83,7 +93,12 @@ router.get( '/:id' ,(req,res,next) => {
       }else {
         res.status(404).json({massage : "post not found"});
       }
-    });
+    })
+    .catch(error =>{
+    res.status(500).json({
+      message: "Fetching post failed!"
+    })
+  });
 });
 
 router.delete('/:id',checkAuth,(req,res,next)=> {
@@ -94,7 +109,11 @@ router.delete('/:id',checkAuth,(req,res,next)=> {
       }else {
         res.status(401).json({message: "not authorized"})
       }
-
+    })
+    .catch(error =>{
+      res.status(500).json({
+        message: "Fetching post failed!"
+      })
     });
 });
 
@@ -122,6 +141,11 @@ router.put(
       }else {
         res.status(401).json({message: "not authorized"})
       }
+    })
+    .catch(error=>{
+      res.status(500).json({
+        message: "Couldn't update the post!"
+      })
     });
 });
 

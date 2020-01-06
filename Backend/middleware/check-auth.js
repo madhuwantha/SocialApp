@@ -8,7 +8,7 @@ module.exports  = (req,res,next) => {
     next();
   }catch (e) {
     res.status(401).json({
-      massage: "Token is not valid"
+      message: "you are not authenticated!"
     });
   }
 };
