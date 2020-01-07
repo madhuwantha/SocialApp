@@ -4,6 +4,10 @@ import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
+
+const backendUrl = environment.apiUrl + 'post/';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +19,14 @@ export class PostServiceService {
 
   getOnePost(id: string) {
     return this.http.get<{_id: string, title: string, content: string, imagePath: string, creator: string}>
-    ('http://localhost:3000/api/post/' + id);
+    (backendUrl + id);
   }
 
   getPosts(postPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postPerPage}&page=${currentPage}`
     this.http
       .get<{massage: string, posts: any, maxPost: number}>
-      ('http://localhost:3000/api/post' + queryParams)
+      (backendUrl + queryParams)
       .pipe(map((postData) => {
         return {
           post: postData.posts.map(post => {
@@ -58,14 +62,14 @@ export class PostServiceService {
     postData.append('content', content_);
     postData.append('image', image, tittle);
     this.http.post<{massage: string, post: Post}>
-    ('http://localhost:3000/api/post', postData)
+    (backendUrl, postData)
       .subscribe((res) => {
         this.router.navigate(['/']);
       });
   }
 
   deletePost(id: string) {
-    return this.http.delete('http://localhost:3000/api/post/' + id);
+    return this.http.delete(backendUrl + id);
   }
   // tslint:disable-next-line:variable-name
   updatePost(id: string, tittle: string , content_: string, image: File | string) {
@@ -86,7 +90,7 @@ export class PostServiceService {
       };
     }
     this.http
-      .put('http://localhost:3000/api/post/' + id , postData)
+      .put(backendUrl + id , postData)
       .subscribe(responce => {
         this.router.navigate(['/']);
       });
