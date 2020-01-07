@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit,} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostServiceService} from '../../services/post/post-service.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Post} from '../../models/post/post.model';
 import {mimeType} from './mime-tyoe.validator';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-post-create',
@@ -15,7 +16,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
   constructor(public postService: PostServiceService,
               public router: ActivatedRoute,
-              private authService
+              public authService: AuthService
         ) { }
   mode = 'create';
   postId = '';
