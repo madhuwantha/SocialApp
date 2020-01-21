@@ -12,7 +12,7 @@ const userRoutes = require('./routes/user');
 
 
 const app = express();
-mongoose.connect(process.env.DB_URL)
+mongoose.connect("mongodb+srv://root:1234@assignment01-53moj.mongodb.net/meat-Social-App?retryWrites=true&w=majority")
   .then(()=>{
     console.log("Connection OK");
   }).catch(()=>{
