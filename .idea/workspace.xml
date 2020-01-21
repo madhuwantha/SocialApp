@@ -1,77 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85f3e9bf-1b0c-40d9-b6d2-a0e284b2ff0a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/main-es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/main-es2015.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/main-es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/main-es5.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/polyfills-es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/polyfills-es2015.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/polyfills-es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/polyfills-es5.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/runtime-es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/runtime-es2015.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/runtime-es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/runtime-es5.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/styles-es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/styles-es2015.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/styles-es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/styles-es5.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/vendor-es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/vendor-es2015.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/vendor-es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/angular/vendor-es5.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/post.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/imgs/madhuwantha-1578638457435.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/check-auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/file.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/post.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/posts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Server.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/main-es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/main-es2015.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/main-es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/main-es5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/polyfills-es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/polyfills-es2015.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/polyfills-es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/polyfills-es5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/runtime-es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/runtime-es2015.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/runtime-es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/runtime-es5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/styles-es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/styles-es2015.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/styles-es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/styles-es5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/vendor-es2015.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/vendor-es2015.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/vendor-es5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/angular/vendor-es5.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/controller/post.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/controller/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/imgs/madhuwantha-1578638457435.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/middleware/check-auth.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/middleware/file.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/models/post.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/models/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/note.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/posts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/user.js" beforeDir="false" />
-    </list>
+    <list default="true" id="85f3e9bf-1b0c-40d9-b6d2-a0e284b2ff0a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,13 +37,14 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Backend" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Backend" />
       <recent name="$PROJECT_DIR$/src/app/models" />
       <recent name="$PROJECT_DIR$/src/app/services/post" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Backend" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -199,7 +130,7 @@
       <workItem from="1578630571730" duration="5841000" />
       <workItem from="1578637761161" duration="2179000" />
       <workItem from="1579610156018" duration="571000" />
-      <workItem from="1579611234251" duration="919000" />
+      <workItem from="1579611234251" duration="1360000" />
     </task>
     <task id="LOCAL-00001" summary="post create">
       <created>1573272886944</created>
